@@ -11,18 +11,18 @@ export const TASK_STATUS_CODE_STRING = {
 export class Task {
   id?: string;
 
-  name?: number;
+  name?: string;
 
-  description?: number;
+  description?: string;
 
   status?: {
     code: TASK_STATUS_CODE;
     updatedAt: Date;
   };
 
-  created_at?: Date;
+  createdAt?: Date;
 
-  updated_at?: Date;
+  updatedAt?: Date;
 
   constructor(task: Task) {
     Object.assign(this, task);
