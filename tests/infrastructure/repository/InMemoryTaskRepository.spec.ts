@@ -120,10 +120,4 @@ describe('InMemoryTaskRepository', () => {
     expect(tasks.length).toBe(1);
     expect(result).toBe(false);
   });
-
-  // it('throws an error when deleting a non-existing task', async () => {
-  //   expect(async () => {
-  //     await sut.delete('invalid_id');
-  //   }).rejects.toBeInstanceOf(ApplicationError);
-  // });
 });
