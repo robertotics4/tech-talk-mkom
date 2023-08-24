@@ -27,11 +27,11 @@ export class InMemoryTaskRepository implements ITaskRepository {
     name,
     description,
     status,
-  }: UpdateTaskDTO): Promise<Task> {
+  }: UpdateTaskDTO): Promise<Task | undefined> {
     const taskIndex = this.tasks.findIndex(task => task.id === id);
 
     if (taskIndex < 0) {
-      throw new ApplicationError('Tarefa não encontrada');
+      return undefined;
     }
 
     const taskFound = this.tasks[taskIndex];
@@ -50,13 +50,15 @@ export class InMemoryTaskRepository implements ITaskRepository {
     return updatedTask;
   }
 
-  async delete(id: string): Promise<void> {
+  async delete(id: string): Promise<boolean> {
     const taskIndex = this.tasks.findIndex(task => task.id === id);
 
     if (taskIndex < 0) {
-      throw new ApplicationError('Tarefa não encontrada');
+      return false;
     }
 
     this.tasks.splice(taskIndex, 1);
+
+    return true;
   }
 }
