@@ -29,6 +29,19 @@ describe('InMemoryTaskRepository', () => {
     expect(Array.isArray(tasks)).toBe(true);
   });
 
+  it('should be able to find a task', async () => {
+    const createTaskDTO: CreateTaskDTO = {
+      name: 'any_name',
+      description: 'any_description',
+    };
+
+    const createdTask = await sut.create(createTaskDTO);
+
+    const result = await sut.findOne(createdTask.id);
+
+    expect(result).toEqual(createdTask);
+  });
+
   it('should update a task name', async () => {
     const createTaskDTO: CreateTaskDTO = {
       name: 'any_name',

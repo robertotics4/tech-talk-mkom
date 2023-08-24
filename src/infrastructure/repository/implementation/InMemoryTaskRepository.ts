@@ -16,6 +16,12 @@ export class InMemoryTaskRepository implements ITaskRepository {
     return this.tasks;
   }
 
+  async findOne(id: string): Promise<Task | undefined> {
+    const task = this.tasks.find(task => task.id === id);
+
+    return task;
+  }
+
   async update({
     id,
     name,
