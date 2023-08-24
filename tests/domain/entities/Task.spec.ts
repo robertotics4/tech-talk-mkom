@@ -1,24 +1,23 @@
-import { faker } from '@faker-js/faker';
-import { TASK_STATUS_CODE, Task } from '@/domain/entities';
+import { Task } from '@/domain/entities';
 
 describe('Task', () => {
   it('should create a task', () => {
-    const randomUUID = faker.string.uuid();
+    const result = new Task({
+      name: 'any_name',
+      description: 'any_description',
+    });
 
-    const fakeTask: Task = {
-      id: randomUUID,
-      name: 'any_task',
+    expect(result).toHaveProperty('id');
+    expect(result).toEqual({
+      id: expect.any(String),
+      name: 'any_name',
       description: 'any_description',
       status: {
-        code: TASK_STATUS_CODE.PENDING,
-        updatedAt: new Date(),
+        code: 0,
+        updatedAt: expect.anything(),
       },
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-
-    const result = new Task(fakeTask);
-
-    expect(result).toEqual(fakeTask);
+      createdAt: expect.anything(),
+      updatedAt: expect.anything(),
+    });
   });
 });

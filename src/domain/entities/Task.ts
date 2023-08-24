@@ -1,3 +1,5 @@
+import { randomUUID } from 'node:crypto';
+
 export enum TASK_STATUS_CODE {
   PENDING = 0,
   COMPLETED = 1,
@@ -8,14 +10,19 @@ export const TASK_STATUS_CODE_STRING = {
   [TASK_STATUS_CODE.COMPLETED]: 'Completa',
 };
 
-export class Task {
-  id?: string;
+type TaskProps = {
+  name: string;
+  description?: string;
+};
 
-  name?: string;
+export class Task {
+  id: string;
+
+  name: string;
 
   description?: string;
 
-  status?: {
+  status: {
     code: TASK_STATUS_CODE;
     updatedAt: Date;
   };
@@ -24,7 +31,15 @@ export class Task {
 
   updatedAt?: Date;
 
-  constructor(task: Task) {
-    Object.assign(this, task);
+  constructor({ name, description }: TaskProps) {
+    this.id = randomUUID();
+    this.name = name;
+    this.description = description;
+    this.status = {
+      code: TASK_STATUS_CODE.PENDING,
+      updatedAt: new Date(),
+    };
+    this.createdAt = new Date();
+    this.updatedAt = new Date();
   }
 }
