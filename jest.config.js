@@ -18,5 +18,6 @@ module.exports = {
   transform: {
     '\\.ts$': 'ts-jest'
   },
-  clearMocks: true
+  clearMocks: true,
+  setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
 }

@@ -1,8 +1,12 @@
 import { ApplicationError, ITaskRepository, Task } from '@/domain';
+import { inject, injectable } from 'tsyringe';
 import { IUpdateTaskUseCase, UpdateTask } from '../types/contracts';
 
+@injectable()
 export class UpdateTaskUseCase implements IUpdateTaskUseCase {
-  constructor(private taskRepository: ITaskRepository) {}
+  constructor(
+    @inject('TaskRepository') private taskRepository: ITaskRepository,
+  ) {}
 
   async execute({ id, name, description }: UpdateTask.Input): Promise<Task> {
     const foundTask = await this.taskRepository.findOne(id);
